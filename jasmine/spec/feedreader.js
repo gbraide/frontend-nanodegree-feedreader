@@ -77,10 +77,51 @@ $(function() {
           });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
+    /*New test suite named "Initial Entries" */
+    describe('Initial Entries', function() {
+        beforeEach(function(done) {
+            loadFeed(0,done);
+        });
+        /*Test that ensures when the loadFeed
+         * function is called and completes its work, there is at least
+         * a single entry element within the feed container.
+         * loadFeed() is asynchronous 
          */
+         it('has at least one entry', function(done) {
+            expect($('.entry').length).toBeGreaterThan(0);//ensures that there is a single entry
+            done();//signals to the framework that the async function is done
+         });
+    });
+    
+    /*New test suite named "New Feed Selection"*/
+    describe('New Feed Selection', function(done) {
+        //Declare global variables for suite
+        var firstArticle;
+        var secondArticle;
+
+        //resets the test before each run
+        beforeEach(function(done) {
+            firstArticle = $('.feed').html();//store 1st article for comparison
+            // Load second item for comparison
+            loadFeed(1, done);
+        });
+
+        //resets the test after the run back to the first item in the feed
+        afterEach(function(done) {
+            loadFeed(0);
+            done();//signals to the framework that the async function is done
+        });
+
+        /*Test that ensures when a new feed is loaded
+         * by the loadFeed function that the content actually changes.
+         * loadFeed() is asynchronous.
+         */
+         it('displays a new feed when content changes', function() {
+            secondArticle = $('.feed').html();//store 2nd article for comparison         
+            expect(firstArticle).toBeDefined();//check if 1st article is defined     
+            expect(secondArticle).toBeDefined();//check if 2nd article is defined
+            
+            expect(firstArticle).not.toEqual(secondArticle);//check if both items are different 
+         });
+    });
 }());
