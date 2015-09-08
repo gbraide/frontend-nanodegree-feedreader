@@ -38,6 +38,10 @@ You will learn how to use Jasmine to write a number of tests against a pre-exist
 13. Write a test that ensures when a new feed is loaded by the loadFeed function that the content actually changes. Remember, loadFeed() is asynchronous.
 14. When complete - all of your tests should pass.
 
+#How to run application
+1. Download or clone the repository on your local machine.
+2. Open index.html in your browser to see the test report at the bottom of the site.
+
 #My References
 1. www.udacity.com *JavaScript Testing*
 2. www.stackoverflow.com
